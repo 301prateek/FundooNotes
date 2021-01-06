@@ -1,0 +1,88 @@
+.parent1{
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    width: 410px;
+    padding: 48px 40px 36px 40px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border-style: solid;
+    border-color: lightgrey;
+    border-width: 1px;
+    min-height: 500px;
+    margin-top: 60px;
+}
+
+.heading1{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    font-family: roboto,'Noto Sans Myanmar UI',arial,sans-serif;
+    padding-bottom: 10px;
+    font-size: 25px;
+    
+}
+
+.message{
+    margin-top: 5px;
+    color: #3B3C3F;
+    font-family: roboto,'Noto Sans Myanmar UI',arial,sans-serif;
+}
+
+.heading2{
+    padding-top: 5px;
+    text-align: center;
+    font-family: roboto,'Noto Sans Myanmar UI',arial,sans-serif;
+}
+.main{
+    font-weight: 400;
+    font-size: 25px;
+    font-family: roboto,'Noto Sans Myanmar UI',arial,sans-serif;
+    color: #3B3C3F;
+}
+
+.input{
+    padding-top: 30px;
+}
+
+.text-field{
+    padding-top: 10px;
+}
+
+.button-bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 15px;
+}
+
+.l1{
+    color: #0d59ff;
+}
+.l2{
+    color: #ee0000;
+}
+.l3{
+    color: #d6ee00;
+ }
+ .l4{
+    color: #0051ff;
+ }
+ .l5{
+    color: #0ea800;
+ }
+ .l6{
+    color: #ff0000;
+ }  
+
+ @media screen and (max-width: 600px){
+     .parent1{
+         width: 100%;
+         border: none;
+         padding-top: 5px;
+     }
+ }
