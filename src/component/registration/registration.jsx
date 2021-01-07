@@ -182,8 +182,8 @@ export default class registration extends React.Component{
             .then(data => {
                 
                 console.log(data);
-                this.props.history.push("/login");
                 this.setState({snackbarOpen: true, snackbarMsg: 'Registered Successfully!'})
+                this.props.history.push("/login");
                 
             })
             .catch(error =>{
@@ -215,8 +215,6 @@ export default class registration extends React.Component{
             this.setState({confirmPassword: this.props.confirmPassword});
           }
       }
-
-    
 
     render(){ 
         return (

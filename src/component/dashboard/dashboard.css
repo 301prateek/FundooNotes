@@ -1,7 +1,7 @@
 .main{
     display: flex;
-    flex-direction: column;
-    /* width: 100%; */
+    flex-direction: row;
+    width: 100%;
     /* justify-content: space-between; */
 }
  .group1{
@@ -16,8 +16,34 @@
     display: flex;
     flex-direction: row;
     margin-top: 60px;
+    width: inherit;
     /* z-index: 999; */
 } 
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 200px;
+    height: 150px;
+}
+
+.profile-picture{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60%;
+    border-bottom: 1px solid lightgray;
+}
+
+.sign-out{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 40%;
+}
+
 /*
 .group2{
     display: flex;

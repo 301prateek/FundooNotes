@@ -1,4 +1,4 @@
-import { Toolbar } from '@material-ui/core';
+import { Divider, Toolbar } from '@material-ui/core';
 import React from 'react';
 import clsx from 'clsx';
 import AppBar from '@material-ui/core/AppBar';
@@ -25,6 +25,8 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import AddNote from '../addNote/addNote'
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
 
 
 const drawerWidth = 240;
@@ -133,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
   content: {
-    marginTop: '2%',
+    marginTop: '3%',
     flexGrow: 1,
     // paddingRight: 200, 
   },
@@ -174,8 +176,14 @@ export default function Dashboard() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <div className="profile">
+        <div className="profile-picture">
+          <Avatar alt="picture" src="/static/images/avatar/1.jpg" className={classes.large} />
+        </div>
+        <div className="sign-out">
+            <Button size="small" variant="outlined"> Sign out</Button>
+        </div>
+      </div>
     </Menu>
   );
 

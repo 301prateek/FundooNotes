@@ -39,6 +39,8 @@
     font-family: roboto,'Noto Sans Myanmar UI',arial,sans-serif;
 }
 .main{
+    display: flex;
+    justify-content: center;
     font-weight: 400;
     font-size: 25px;
     font-family: roboto,'Noto Sans Myanmar UI',arial,sans-serif;

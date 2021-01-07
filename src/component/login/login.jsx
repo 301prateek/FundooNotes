@@ -86,10 +86,12 @@ export default class login extends React.Component{
             }
             service.login(userData).then(data => {
                 console.log(data);
+                localStorage.setItem('userData', JSON.stringify(data));
                 this.props.history.push('/dashboard');
             }).catch(error => {
                 console.log(error);
             })
+            
         }
     }
     render(){
