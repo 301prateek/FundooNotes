@@ -27,6 +27,10 @@ import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import AddNote from '../addNote/addNote'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import DisplayNotes from '../displayNote/displayNote';
+import NoteService from '../../Services/noteService';
+
+const service = new NoteService();
 
 
 const drawerWidth = 240;
@@ -149,8 +153,8 @@ export default function Dashboard() {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
-
   const [open, setOpen] = React.useState(false);
+  const [notes,setNotes]= React.useState([]);
 
   const handleDrawerOpen = () => {
     setOpen(open ? false : true);
@@ -163,6 +167,20 @@ export default function Dashboard() {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  React.useEffect(() => { 
+    getAllNotes();
+  }, [] )
+
+  const getAllNotes = () => {
+    service.getNotes().then((data) => {
+        let array = data.data.data.data;
+        console.log(array);
+        setNotes(array);
+    }).catch(error => {
+        console.log(error);
+    })
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -179,6 +197,7 @@ export default function Dashboard() {
       <div className="profile">
         <div className="profile-picture">
           <Avatar alt="picture" src="/static/images/avatar/1.jpg" className={classes.large} />
+          <small>{localStorage.getItem("email")}</small>
         </div>
         <div className="sign-out">
             <Button size="small" variant="outlined"> Sign out</Button>
@@ -230,7 +249,7 @@ export default function Dashboard() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle /> 
             </IconButton>
           </div>
         </Toolbar>
@@ -292,6 +311,7 @@ export default function Dashboard() {
       </Drawer>
       <div className={classes.content}>
         <AddNote />
+        <DisplayNotes notes={notes}/>
       </div>
       </div>
     </div>

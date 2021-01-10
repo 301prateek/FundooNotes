@@ -1,0 +1,29 @@
+    
+    .buttons{
+        display: flex;
+        flex-direction: row;
+        width: 260px;
+        
+    }
+    
+    .group{
+        height: 15px;
+    }
+    
+    
+    @media screen and (max-width: 650px){
+    
+        .buttons{
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            width: 260px;
+        }
+    
+        .group{
+            display: flex;
+            flex-direction: row;
+            width: 255px;
+            height: 15px;
+        }
+    }
