@@ -176,7 +176,7 @@ export default class registration extends React.Component{
                 "lastName" : this.state.lastName,
                 "email" : this.state.email,
                 "password": this.state.password,
-                "service": "advanced"
+                "service": "advance"
             }
             service.registration(userData)
             .then(data => {

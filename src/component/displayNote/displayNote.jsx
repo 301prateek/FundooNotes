@@ -4,19 +4,33 @@ import IconButtons from '../iconMenu/iconButtons'
 
 export default function DisplayNotes(props) {
 
-    // const [notes, setNotes] = React.useState(props.notes);
+    // const [trashNote, setTrashNote] = React.useState(false);
 
+    // const handleTrash = (value) => {
+    //     setTrashNote(value);
+    // }
+
+    const [color, setColor] = React.useState();
+
+    const colorChange = (value) => {
+        setColor(value);
+    }
 
     return (
         <div className="notes-content">
-            {props.notes.map((user) => (
-                <div className="noteDisplay" style={{backgroundColor: user.color}}>
-                    <small>{user.title}</small>
-                    <small>{user.description}</small>
+            {props.notes.map((data,i) => (
+                <div key={i} className="noteDisplay" style={{backgroundColor: data.color, color}}>
+                    <div>
+                        <small>{data.title}</small>
+                    </div>
+                    <div>
+                        <small><strong>{data.description}</strong></small>
+                    </div>
                     <div className="buttonsHover">
-                        <IconButtons />
+                        <IconButtons noteId={data.id} colorChange={colorChange}/>
                     </div>
                 </div>
+                //fragment
             ))}
         </div>
     )

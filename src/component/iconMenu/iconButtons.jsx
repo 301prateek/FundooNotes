@@ -5,11 +5,15 @@ import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import PaletteOutlinedIcon from '@material-ui/icons/PaletteOutlined';
 import AddAlertOutlinedIcon from '@material-ui/icons/AddAlertOutlined';
-import Menu from '@material-ui/core/Menu';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import './iconButtons.css';
 import MoreMenu from './moreMenu';
+import NoteService from '../../Services/noteService';
+import MoreVertOutlinedIcon from '@material-ui/icons/MoreVertOutlined';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
+const service = new NoteService();
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -64,6 +68,7 @@ export default function IconButtons(props) {
     const isMenuOpen = Boolean(anchorEl);
 
     const [color, setColor] = React.useState();
+    const [trashNote, setTrashNote] = React.useState(false);
 
     const handleColorChange = (value) => {
         props.handleColor(value);
@@ -76,6 +81,15 @@ export default function IconButtons(props) {
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
+
+    const colorChange = (value) => {
+        props.setColor(value);
+    }
+
+    const handleTrash = () => {
+         setTrashNote(true);
+        
+    }
 
     const menuId = 'palette-menu';
     const renderMenu = (
@@ -94,23 +108,67 @@ export default function IconButtons(props) {
                     <IconButton
                         className={classes.button}
                         style={{ backgroundColor: value }}
-                        onClick={() => handleColorChange(value)}>
+                        onClick={() =>{ handleColorChange(value); colorChange(value);}}>
                     </IconButton>
                 ))}
             </div>
         </Menu>
     );
 
+    const trash = () => {
+        let data = {
+          noteIdList : [props.noteId],
+          "isDeleted": true
+        };
+        service.deleteNote(data, localStorage.getItem("userToken")).then((data) => {
+            console.log(data);
+            // props.allNotes();
+           
+        }).catch(error => {
+            console.log(error);
+        })
+        setAnchorEl1(null);
+    }
+    
+        const [anchorEl1, setAnchorEl1] = React.useState(null);
+        const isOpen = Boolean(anchorEl1);
+    
+        const handleOpen = (event) => {
+            setAnchorEl1(event.currentTarget);
+        };
+    
+        const handleClose = () => {
+            setAnchorEl1(null);
+        };
+    
+        const menu = 'options';
+        const renderMenuMore = (
+            <Menu
+                getContentAnchorEl={null}
+                anchorEl={anchorEl1}
+                id={menu}
+                keepMounted
+                open={isOpen}
+                onClose={handleClose}
+                anchorEl={anchorEl1}
+                keepMounted
+            >
+                <div className={classes.more}>
+                    <MenuItem onClick={() => trash()}>Delete</MenuItem>
+                </div>
+            </Menu>
+        );
+
     return (
         <div className="buttons">
             <IconButton>
-                <AddAlertOutlinedIcon />
+                <AddAlertOutlinedIcon style={{ fontSize: 20 }} />
             </IconButton>
             <IconButton>
-                <PersonAddOutlinedIcon />
+                <PersonAddOutlinedIcon style={{ fontSize: 20 }}/>
             </IconButton>
             <IconButton
-                // className="profile"
+                // id={menuId}
                 className={classes.paper}
                 name="palette-menu"
                 edge="end"
@@ -120,16 +178,32 @@ export default function IconButtons(props) {
                 onClick={handlePalleteMenuOpen}
                 color="inherit"
             >
-                <PaletteOutlinedIcon />
+                <PaletteOutlinedIcon style={{ fontSize: 20 }} />
+                {renderMenu}
             </IconButton>
+            <IconButton>
+                <ImageOutlinedIcon style={{ fontSize: 20 }}/>
+            </IconButton>
+            <IconButton>
+                <ArchiveOutlinedIcon style={{ fontSize: 20 }}/>
+            </IconButton>
+            <IconButton
+                name="options"
+                anchorEl={anchorEl1}
+                aria-haspopup="true"
+                aria-controls={menu}
+                aria-label="more"
+                edge="end"
+                keepMounted
+                onClick={handleOpen}
+                aria-controls={menu}
+            >
+                <MoreVertOutlinedIcon />
+                {/* */}
+            </IconButton>
+            {/* {renderMenuMore} */}
             {renderMenu}
-            <IconButton>
-                <ImageOutlinedIcon />
-            </IconButton>
-            <IconButton>
-                <ArchiveOutlinedIcon />
-            </IconButton>
-            <MoreMenu />
+            {renderMenuMore} 
         </div>
-    )
+    );
 }

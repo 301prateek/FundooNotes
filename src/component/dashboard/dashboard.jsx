@@ -156,6 +156,7 @@ export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
   const [notes,setNotes]= React.useState([]);
 
+
   const handleDrawerOpen = () => {
     setOpen(open ? false : true);
   };
@@ -181,6 +182,8 @@ export default function Dashboard() {
         console.log(error);
     })
   }
+
+
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -311,7 +314,7 @@ export default function Dashboard() {
       </Drawer>
       <div className={classes.content}>
         <AddNote />
-        <DisplayNotes notes={notes}/>
+        <DisplayNotes notes={notes} allNotes={getAllNotes}/>
       </div>
       </div>
     </div>

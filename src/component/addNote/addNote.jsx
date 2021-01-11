@@ -46,7 +46,7 @@ export default function AddNote() {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
-    const [noteContent, setNoteContent] = React.useState(true);
+    const [noteContent, setNoteContent] = React.useState(false);
     const [noteTitle, setNoteTitle] = React.useState("");
     const [noteDescription, setNoteDescription] = React.useState("");
 
