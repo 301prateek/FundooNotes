@@ -1,0 +1,19 @@
+.title{
+   width: 100%;
+}
+
+.description{
+    width: 100%;
+}
+
+.dialog-main{
+    width: 500px !important;
+    padding: 12px 12px 12px 12px;
+}
+
+.controls{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: fit-content;
+}

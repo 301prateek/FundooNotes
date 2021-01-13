@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     // zIndex: '999',
     width: drawerWidth,
-    paddingLeft: '8px',
+    // paddingLeft: '8px',
     paddingTop: '60px',
     // flexShrink: 0,
     whiteSpace: 'nowrap',
@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
   drawerOpen: {
     zIndex: '999',
     paddingTop: '60px',
-    paddingLeft: '8px',
+    // paddingLeft: '8px',
     border: 'none',
     width: drawerWidth,
     transition: theme.transitions.create('width', {
@@ -124,7 +124,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '@media(maxWidth: 600px)' : {
       paddingLeft: '3px',
-    }
+    },
   },
   appbar:{
     boxShadow: 'none',
@@ -140,9 +140,18 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     marginTop: '3%',
-    flexGrow: 1,
+    width: '100%'
+    // flexGrow: 1,
     // paddingRight: 200, 
   },
+  drawerOptions:{
+      backgroundColor: '#feefc3',
+      borderRadius : '28px 28px 28px 28px',
+    '&.isExpanded':{
+        backgroundColor: '#feefc3',
+        borderRadius : '0px 28px 28px 0px', 
+    }
+  }
 
 }));
 
@@ -209,6 +218,8 @@ export default function Dashboard() {
     </Menu>
   );
 
+
+
   return (
     <div className="main">
       <div>
@@ -274,8 +285,8 @@ export default function Dashboard() {
         }}
       >
         <List>
-          <ListItem button>
-            <ListItemIcon>
+          <ListItem button className={classes.drawerOptions} >
+            <ListItemIcon >
               <EmojiObjectsOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Notes" />

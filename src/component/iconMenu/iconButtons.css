@@ -3,13 +3,12 @@
         display: flex;
         flex-direction: row;
         width: fit-content;
-        
     }
     
     .group{
         height: 15px;
     }
-    
+
     
     @media screen and (max-width: 650px){
     

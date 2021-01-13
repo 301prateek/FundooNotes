@@ -7,17 +7,18 @@ import PaletteOutlinedIcon from '@material-ui/icons/PaletteOutlined';
 import AddAlertOutlinedIcon from '@material-ui/icons/AddAlertOutlined';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import './iconButtons.css';
-import MoreMenu from './moreMenu';
 import NoteService from '../../Services/noteService';
 import MoreVertOutlinedIcon from '@material-ui/icons/MoreVertOutlined';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
+
 const service = new NoteService();
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginRight: theme.spacing(1),
+        marginRight: theme.spacing(0),
+        paddingLeft: theme.spacing(1),
 
     },
     palette: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "50%",
         width: '5px',
         height: '5px',
+
     },
     more: {
         display: 'flex',
@@ -42,10 +44,18 @@ const useStyles = makeStyles((theme) => ({
         width: '130px',
         border: 'none',
     },
+    root:{
+        "&.MuiIconButton-root" : {
+            padding:"8px",
+            backgroundColor: "blue"
+        },
+        display: "flex",
+        flexDirection: "row",
+        width: "fitContent",
+    }    
 }));
 
 export default function IconButtons(props) {
-
     const colors = [
         '#fff',
         '#f28b82',
@@ -70,9 +80,33 @@ export default function IconButtons(props) {
     const [color, setColor] = React.useState();
     const [trashNote, setTrashNote] = React.useState(false);
 
+    // const handleColorChange = (value) => {
+    //     props.handleColor(value);  
+    // }
+
     const handleColorChange = (value) => {
-        props.handleColor(value);
+        if(props.id !== undefined){
+            console.log(props.id);
+            setColor(value);
+            let data ={
+                noteIdList : [props.id],
+                color : color
+            }
+            service.updateColor(data,localStorage.getItem("userToken")).then(res=>{
+                console.log(res);
+            }).catch(error =>{
+                console.log(error);
+            })
+        }
+        else{
+            console.log(value);
+            props.handleColor(value);  
+        }
     }
+
+    // const handleColorUpdate = (value) => {
+    //     setColor(value);
+    // }
 
     const handlePalleteMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -82,9 +116,9 @@ export default function IconButtons(props) {
         setAnchorEl(null);
     };
 
-    const colorChange = (value) => {
-        props.setColor(value);
-    }
+    // const colorChange = (value) => {
+    //     props.setColor(value);
+    // }
 
     const handleTrash = () => {
          setTrashNote(true);
@@ -108,7 +142,7 @@ export default function IconButtons(props) {
                     <IconButton
                         className={classes.button}
                         style={{ backgroundColor: value }}
-                        onClick={() =>{ handleColorChange(value); colorChange(value);}}>
+                        onClick={() => handleColorChange(value)}>
                     </IconButton>
                 ))}
             </div>
@@ -128,6 +162,18 @@ export default function IconButtons(props) {
             console.log(error);
         })
         setAnchorEl1(null);
+    }
+
+    const archive = () => {
+        let data = {
+            noteIdList : [props.noteId],
+            "isArchived": true
+        };
+        service.archiveNote(data, localStorage.getItem("userToken")).then((data) => {
+            console.log(data);
+        }).catch(error => {
+            console.log(error);
+        })
     }
     
         const [anchorEl1, setAnchorEl1] = React.useState(null);
@@ -161,11 +207,11 @@ export default function IconButtons(props) {
 
     return (
         <div className="buttons">
-            <IconButton>
+            <IconButton className={classes.paper}>
                 <AddAlertOutlinedIcon style={{ fontSize: 20 }} />
             </IconButton>
-            <IconButton>
-                <PersonAddOutlinedIcon style={{ fontSize: 20 }}/>
+            <IconButton className={classes.paper}>
+                <PersonAddOutlinedIcon style={{ fontSize: 20 }} />
             </IconButton>
             <IconButton
                 // id={menuId}
@@ -179,15 +225,15 @@ export default function IconButtons(props) {
                 color="inherit"
             >
                 <PaletteOutlinedIcon style={{ fontSize: 20 }} />
-                {renderMenu}
+            </IconButton >
+            <IconButton className={classes.paper}>
+                <ImageOutlinedIcon style={{ fontSize: 20 }}  />
             </IconButton>
-            <IconButton>
-                <ImageOutlinedIcon style={{ fontSize: 20 }}/>
-            </IconButton>
-            <IconButton>
-                <ArchiveOutlinedIcon style={{ fontSize: 20 }}/>
+            <IconButton className={classes.paper}>
+                <ArchiveOutlinedIcon onClick={() => archive()} style={{ fontSize: 20 }} />
             </IconButton>
             <IconButton
+                className={classes.paper}
                 name="options"
                 anchorEl={anchorEl1}
                 aria-haspopup="true"
@@ -198,10 +244,8 @@ export default function IconButtons(props) {
                 onClick={handleOpen}
                 aria-controls={menu}
             >
-                <MoreVertOutlinedIcon />
-                {/* */}
+                <MoreVertOutlinedIcon  />
             </IconButton>
-            {/* {renderMenuMore} */}
             {renderMenu}
             {renderMenuMore} 
         </div>

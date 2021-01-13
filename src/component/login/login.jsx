@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import userService from '../../Services/userService';
 import { Link } from 'react-router-dom';
-// import auth from './component/authentication/auth';
 
 const service = new userService();
 
@@ -19,13 +18,9 @@ export default class login extends React.Component{
             password: "",
             passwordErr: false,
             passwordMsg: "",
-            // authenticated: false,
         }
     }
 
-    // isAuthenticated(){
-    //     return this.authenticated;
-    // };
 
     handleChange = (e) => {
         this.setState({
@@ -95,7 +90,6 @@ export default class login extends React.Component{
                 localStorage.setItem('userToken', data.data.id);
                 localStorage.setItem('email', data.data.email);
                 this.props.history.push('/dashboard');
-                // this.authenticated = true;
                 
             }).catch(error => {
                 console.log(error);

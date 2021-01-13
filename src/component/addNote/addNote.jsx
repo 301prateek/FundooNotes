@@ -4,13 +4,7 @@ import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import IconButton from "@material-ui/core/IconButton";
 import BrushOutlinedIcon from '@material-ui/icons/BrushOutlined';
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
-import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
-import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
-import PaletteOutlinedIcon from '@material-ui/icons/PaletteOutlined';
-import AddAlertOutlinedIcon from '@material-ui/icons/AddAlertOutlined';
-import MoreVertOutlinedIcon from '@material-ui/icons/MoreVertOutlined';
 import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import NoteService from '../../Services/noteService';
 import IconButtons from '../iconMenu/iconButtons'
@@ -67,21 +61,6 @@ export default function AddNote() {
     const handleNoteDescription = (e) => {
         setNoteDescription(e.target.value);
     }
-
-
-    // const handleClose = () => {
-    //     setNoteContent(false);
-    // }
-
-    // const handleChangeContent = (e) => {
-    //     const { name, value } = e.target;
-    //     setNote(prevNote => {
-    //         return {
-    //             ...prevNote,
-    //             [name]: value
-    //         };
-    //     });
-    // }
 
     const save = (e) => {
         e.preventDefault();

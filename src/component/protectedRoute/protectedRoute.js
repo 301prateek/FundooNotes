@@ -4,20 +4,22 @@ import { Redirect, Route } from 'react-router-dom';
 
 export default function ProtectedRoute({ component: Component, ...rest }) {
 
-    const auth = false;
-    const token = localStorage.getItem("userToken");
+    // const token = ;
 
     const isAuthenticated = () => {
-        console.log(token);
-        console.log("Reached");
-        return (token ? auth = true : auth = false);
-
+        if(localStorage.getItem("userToken") === null){
+            return false;
+            console.log("false");
+        }else{
+            return true;
+            console.log("true");
+        }
     };
 
 
     return (
         <Route {...rest} render={props => {
-            if (isAuthenticated) {
+            if (isAuthenticated()) {
                 console.log("authenticated");
                 return <Component {...props} />;
             }

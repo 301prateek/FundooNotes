@@ -30,4 +30,28 @@ export default class noteService {
             },
           });
     }
+
+    archiveNote = (data, token) => {
+      return httpService.Post(`${this.baseUrl}/notes/archiveNotes`, data,{
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+    }
+
+    updateNote = (data, token) => {
+      return  httpService.Post(`${this.baseUrl}/notes/updateNotes`, data,{
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+    }
+
+    updateColor = (data,token) => {
+      return  httpService.Post(`${this.baseUrl}/notes/changesColorNotes`, data,{
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+    }
 }
